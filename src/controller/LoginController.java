@@ -1,12 +1,17 @@
-package windows.login;
+package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class LoginController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginController implements Initializable {
 
     public Label loginLabel;
     public TextField loginTextField;
@@ -14,6 +19,14 @@ public class LoginController {
     public Button singinButton;
     public Label checkerLabel;
     public Button registerButton;
+
+    private Stage mainStage;
+    private ResourceBundle resourceBundle;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.resourceBundle = resources;
+    }
 
     public void signinAction(ActionEvent actionEvent) {
         if (formValidation()) {
@@ -47,5 +60,11 @@ public class LoginController {
 
     public void registerAction(ActionEvent actionEvent) {
         // TODO realise goto new register window
+    }
+
+    // getting main stage from main class for better performance(now we don't
+    // need to create new stage, just use main one)
+    public void setMainStage(Stage stage) {
+        this.mainStage = stage;
     }
 }

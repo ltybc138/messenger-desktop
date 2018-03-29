@@ -8,11 +8,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="420.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="windows.register.RegisterController">
+<AnchorPane prefHeight="420.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
       <VBox prefHeight="420.0" prefWidth="270.0">
          <children>
-            <Label text="Register">
+            <Label text="%title.name.register">
                <font>
                   <Font size="15.0" />
                </font>
@@ -33,31 +33,31 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Email: ">
+                  <Label text="%label.email">
                      <GridPane.margin>
                         <Insets left="7.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="First name: " GridPane.rowIndex="1">
+                  <Label text="%label.first_name" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="7.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Last name: " GridPane.rowIndex="2">
+                  <Label text="%label.last_name" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="7.0" />
                      </GridPane.margin></Label>
-                  <Label text="Login: " GridPane.rowIndex="3">
+                  <Label text="%label.login" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="7.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Password: " GridPane.rowIndex="4">
+                  <Label text="%label.password" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="7.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label text="Confirm password: " GridPane.rowIndex="5">
+                  <Label text="%label.confirm_password" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="7.0" />
                      </GridPane.margin>
@@ -94,7 +94,7 @@
                   </PasswordField>
                </children>
             </GridPane>
-            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#registerAction" text="Register">
+            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#registerAction" text="%button.register">
                <VBox.margin>
                   <Insets left="7.0" top="5.0" />
                </VBox.margin>

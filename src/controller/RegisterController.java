@@ -1,12 +1,17 @@
-package windows.register;
+package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
-public class RegisterController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RegisterController implements Initializable {
     public TextField emailTextField;
     public TextField firstNameTextField;
     public TextField lastNameTextField;
@@ -16,6 +21,14 @@ public class RegisterController {
 
     public Button registerButton;
     public Label checkerLabel;
+
+    private Stage mainStage;
+    private ResourceBundle resourceBundle;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.resourceBundle = resources;
+    }
 
     public void registerAction(ActionEvent actionEvent) {
         if (formValidation()) {
@@ -51,5 +64,12 @@ public class RegisterController {
             return true;
         }
         return false;
+    }
+    // getting main stage from main class for better performance(now we don't
+
+    // need to create new stage, just use main one)
+    public void setMainStage(Stage stage) {
+        this.mainStage = stage;
+        this.mainStage.setTitle(resourceBundle.getString("title.name.register"));
     }
 }
