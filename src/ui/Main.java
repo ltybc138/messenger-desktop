@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.logging.ConsoleLogger;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -16,17 +17,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("../fxml/register.fxml"));
-        loader.setResources(ResourceBundle.getBundle("bundles.locale", new Locale("ru")));
-
-//        Parent fxmlMain = loader.load();
-//        LoginController loginController = loader.getController();
-//        loginController.setMainStage(primaryStage);
+        loader.setLocation(getClass().getResource("../fxml/login.fxml"));
+//        loader.setLocation(getClass().getResource("../fxml/register.fxml"));
+        loader.setResources(ResourceBundle.getBundle("bundles.locale", new Locale("en")));
 
         Parent fxmlMain = loader.load();
-        RegisterController registerController = loader.getController();
-        registerController.setMainStage(primaryStage);
+        LoginController loginController = loader.getController();
+        loginController.setMainStage(primaryStage);
+        loginController.setLogger(new ConsoleLogger());
 
+//        Parent fxmlMain = loader.load();
+//        RegisterController registerController = loader.getController();
+//        registerController.setMainStage(primaryStage);
+//        registerController.setLogger(new ConsoleLogger());
 
         Scene scene = new Scene(fxmlMain,  280, 150);
         //primaryStage.setTitle(loader.getResources().getString("title.name.login"));

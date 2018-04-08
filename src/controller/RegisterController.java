@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.logging.LogType;
+import utils.logging.Logger;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,10 +22,10 @@ public class RegisterController implements Initializable {
     public PasswordField confirmTextField;
 
     public Button registerButton;
-    public Label checkerLabel;
 
     private Stage mainStage;
     private ResourceBundle resourceBundle;
+    private Logger logger;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,10 +34,9 @@ public class RegisterController implements Initializable {
 
     public void registerAction(ActionEvent actionEvent) {
         if (formValidation()) {
-            checkerLabel.setText("Correct");
-            registering();
+            logger.log("Register button tap", LogType.ACTION);
         } else {
-            checkerLabel.setText("Incorrect");
+            logger.log("Please, fill all the textfileds", LogType.ERROR);
         }
     }
 
@@ -71,5 +72,9 @@ public class RegisterController implements Initializable {
     public void setMainStage(Stage stage) {
         this.mainStage = stage;
         this.mainStage.setTitle(resourceBundle.getString("title.name.register"));
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
     }
 }

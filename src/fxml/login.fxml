@@ -68,11 +68,6 @@
                   </Button>
                </children>
             </HBox>
-            <Label fx:id="checkerLabel">
-               <VBox.margin>
-                  <Insets left="7.0" top="5.0" />
-               </VBox.margin>
-            </Label>
          </children>
       </VBox>
    </children>
