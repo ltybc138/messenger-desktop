@@ -94,11 +94,16 @@
                   </PasswordField>
                </children>
             </GridPane>
-            <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#registerAction" text="%button.register">
-               <VBox.margin>
-                  <Insets left="7.0" top="5.0" />
-               </VBox.margin>
-            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="registerButton" defaultButton="true" mnemonicParsing="false" onAction="#registerAction" text="%button.register" />
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#signinAction" text="%button.login">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>

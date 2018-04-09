@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.UIConstants;
 import utils.logging.ConsoleLogger;
 
 import java.util.Locale;
@@ -31,7 +32,7 @@ public class Main extends Application {
 //        registerController.setMainStage(primaryStage);
 //        registerController.setLogger(new ConsoleLogger());
 
-        Scene scene = new Scene(fxmlMain,  280, 150);
+        Scene scene = new Scene(fxmlMain, UIConstants.loginWindowWidth, UIConstants.loginWindowHeight);
         //primaryStage.setTitle(loader.getResources().getString("title.name.login"));
         primaryStage.setMinWidth(280);
         primaryStage.setMinHeight(150);

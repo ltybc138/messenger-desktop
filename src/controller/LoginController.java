@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import utils.UIConstants;
 import utils.logging.LogType;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -54,7 +55,7 @@ public class LoginController implements Initializable {
             controller.setMainStage(mainStage);
             controller.setLogger(logger);
 
-            Scene registerScene = new Scene(fxmlMain, 280, 420);
+            Scene registerScene = new Scene(fxmlMain, UIConstants.registerWindowWidth, UIConstants.registerWindowHeight);
             mainStage.setScene(registerScene);
             mainStage.show();
         } catch (IOException e) {
