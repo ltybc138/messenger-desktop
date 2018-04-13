@@ -25,7 +25,6 @@ public class Main extends Application {
         Parent fxmlMain = loader.load();
         LoginController loginController = loader.getController();
         loginController.setMainStage(primaryStage);
-        loginController.setLogger(new ConsoleLogger());
 
 //        Parent fxmlMain = loader.load();
 //        RegisterController registerController = loader.getController();

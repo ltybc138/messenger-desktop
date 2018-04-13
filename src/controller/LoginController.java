@@ -3,7 +3,9 @@ package controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import utils.ServerConnector;
 import utils.UIConstants;
+import utils.logging.ConsoleLogger;
 import utils.logging.LogType;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -14,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.logging.Logger;
 
+import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,10 +37,12 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
+        this.logger = ConsoleLogger.getInstance();
     }
 
     public void signinAction(ActionEvent actionEvent) {
         logger.log("Sing in button tapped", LogType.ACTION);
+        loggingIn();
     }
 
     public void registerAction(ActionEvent actionEvent) {
@@ -53,7 +58,6 @@ public class LoginController implements Initializable {
             Parent fxmlMain = loader.load();
             RegisterController controller = loader.getController();
             controller.setMainStage(mainStage);
-            controller.setLogger(logger);
 
             Scene registerScene = new Scene(fxmlMain, UIConstants.registerWindowWidth, UIConstants.registerWindowHeight);
             mainStage.setScene(registerScene);
@@ -69,6 +73,13 @@ public class LoginController implements Initializable {
      */
     private boolean loggingIn() {
         // TODO replace with login logic in web server
+        ServerConnector connector = ServerConnector.getInstance();
+        boolean loggedIn = connector.login(loginTextField.getText().trim(), passwordTextField.getText().trim());
+        if (loggedIn) {
+            logger.log("Successfully logged in", LogType.INFO);
+            return true;
+        }
+        logger.log("Logging in failed", LogType.INFO);
         return false;
     }
 
@@ -89,10 +100,5 @@ public class LoginController implements Initializable {
     public void setMainStage(Stage stage) {
         this.mainStage = stage;
         this.mainStage.setTitle(resourceBundle.getString("title.name.login"));
-    }
-
-    // setting the logger
-    public void setLogger(Logger logger) {
-        this.logger = logger;
     }
 }

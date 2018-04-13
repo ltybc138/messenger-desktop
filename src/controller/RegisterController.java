@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import utils.UIConstants;
+import utils.logging.ConsoleLogger;
 import utils.logging.LogType;
 import utils.logging.Logger;
 
@@ -35,6 +36,7 @@ public class RegisterController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
+        this.logger = ConsoleLogger.getInstance();
     }
 
     public void registerAction(ActionEvent actionEvent) {
@@ -58,7 +60,6 @@ public class RegisterController implements Initializable {
             Parent fxmlMain = loader.load();
             LoginController controller = loader.getController();
             controller.setMainStage(mainStage);
-            controller.setLogger(logger);
 
             Scene loginScene = new Scene(fxmlMain, UIConstants.loginWindowWidth,  UIConstants.loginWindowHeight);
             mainStage.setScene(loginScene);
@@ -100,9 +101,5 @@ public class RegisterController implements Initializable {
     public void setMainStage(Stage stage) {
         this.mainStage = stage;
         this.mainStage.setTitle(resourceBundle.getString("title.name.register"));
-    }
-
-    public void setLogger(Logger logger) {
-        this.logger = logger;
     }
 }
