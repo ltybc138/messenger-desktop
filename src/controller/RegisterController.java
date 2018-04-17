@@ -6,20 +6,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utils.UIConstants;
-import utils.logging.ConsoleLogger;
-import utils.logging.LogType;
-import utils.logging.Logger;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
+    private static Logger logger = LogManager.getLogger(RegisterController.class);
+
     public TextField emailTextField;
     public TextField firstNameTextField;
     public TextField lastNameTextField;
@@ -31,24 +31,23 @@ public class RegisterController implements Initializable {
 
     private Stage mainStage;
     private ResourceBundle resourceBundle;
-    private Logger logger;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
-        this.logger = ConsoleLogger.getInstance();
+        logger.info("Successfully initialized");
     }
 
     public void registerAction(ActionEvent actionEvent) {
         if (formValidation()) {
-            logger.log("Register button tap", LogType.ACTION);
+            logger.info("Register button tap");
         } else {
-            logger.log("Please, fill all the textfileds", LogType.ERROR);
+            logger.info("Please, fill all the textfileds");
         }
     }
 
     public void signinAction(ActionEvent actionEvent) {
-        logger.log("Login button tapped", LogType.ACTION);
+        logger.info("Login button tapped");
 
         // setting up loader
         FXMLLoader loader = new FXMLLoader();
@@ -56,16 +55,18 @@ public class RegisterController implements Initializable {
         loader.setResources(resourceBundle);
 
         try {
+            logger.info("Loading the loader");
             // setting up parent of the login scene
             Parent fxmlMain = loader.load();
             LoginController controller = loader.getController();
             controller.setMainStage(mainStage);
 
+            logger.info("Loading the \"Register\" scene\n");
             Scene loginScene = new Scene(fxmlMain, UIConstants.loginWindowWidth,  UIConstants.loginWindowHeight);
             mainStage.setScene(loginScene);
             mainStage.show();
         } catch (IOException e) {
-            logger.log(e.getMessage(), LogType.EXCEPTION);
+            logger.error(e.getMessage());
         }
     }
 

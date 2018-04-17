@@ -1,27 +1,26 @@
 package utils;
 
-import utils.logging.ConsoleLogger;
-import utils.logging.LogType;
-import utils.logging.Logger;
+import controller.LoginController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class ServerConnector {
+    private static Logger logger = LogManager.getLogger(ServerConnector.class);
     public static volatile ServerConnector instance;
 
     // url of the main server
     private String mainUrl;
     private String USER_AGENT;
-    private Logger logger;
 
     // initializing all private variables
     private ServerConnector() {
         mainUrl = "http://localhost:8080";
         USER_AGENT = "Mozilla/5.0";
-        logger = ConsoleLogger.getInstance();
+        logger.info("Connector has been initialized");
     }
 
     public static ServerConnector getInstance() {
@@ -44,8 +43,10 @@ public class ServerConnector {
      */
     public boolean login(String login, String password) {
         try {
+            logger.info("Connecting to the server...");
             URL url = new URL(mainUrl + "/login");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            logger.info("Successfully connected");
 
             // add request header
             connection.setRequestMethod("POST");
@@ -54,17 +55,20 @@ public class ServerConnector {
             String urlParams = "login=" + login + "&" +
                     "password=" + password;
             // send post request
+            logger.info("Sending data to the server...");
             connection.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
             wr.writeBytes(urlParams);
             wr.flush();
             wr.close();
+            logger.info("Successfully sent");
 
             int responseCode = connection.getResponseCode();
-            logger.log("\n\tSending 'POST' request to URL : " + mainUrl +
+            logger.info("\n\tSending 'POST' request to URL : " + mainUrl +
                     "\n\tPost params : " + urlParams +
-                    "\n\tResponse code : " + responseCode, LogType.INFO);
+                    "\n\tResponse code : ");
 
+            logger.info("Reading response from the server");
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
@@ -73,17 +77,15 @@ public class ServerConnector {
                 response.append(inputLine);
             }
             in.close();
+            logger.info("Response has been read");
 
-            logger.log("\n\tResponse : " + response.toString(), LogType.INFO);
+            logger.info("\n\tResponse : " + response.toString());
 
             if (codeTranslate(responseCode)) {
                 return true;
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            return false;
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return false;
         }
         return false;
