@@ -5,8 +5,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import utils.ServerConnector;
-import utils.UIConstants;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import utils.Server;
+import utils.UIConstants;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,7 +74,7 @@ public class LoginController implements Initializable {
      */
     private boolean loggingIn() {
         // TODO replace with login logic in web server
-        ServerConnector connector = ServerConnector.getInstance();
+        Server connector = Server.getInstance();
         boolean loggedIn = connector.login(loginTextField.getText().trim(), passwordTextField.getText().trim());
         if (loggedIn) {
             logger.info("Successfully logged in");

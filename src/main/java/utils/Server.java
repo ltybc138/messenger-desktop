@@ -1,6 +1,5 @@
 package utils;
 
-import controller.LoginController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,28 +7,28 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ServerConnector {
-    private static Logger logger = LogManager.getLogger(ServerConnector.class);
-    public static volatile ServerConnector instance;
+public class Server {
+    private static Logger logger = LogManager.getLogger(Server.class);
+    public static volatile Server instance;
 
     // url of the main server
     private String mainUrl;
     private String USER_AGENT;
 
     // initializing all private variables
-    private ServerConnector() {
+    private Server() {
         mainUrl = "http://localhost:8080";
         USER_AGENT = "Mozilla/5.0";
         logger.info("Connector has been initialized");
     }
 
-    public static ServerConnector getInstance() {
-        ServerConnector localInstance = instance;
+    public static Server getInstance() {
+        Server localInstance = instance;
         if (localInstance == null) {
-            synchronized (ServerConnector.class) {
+            synchronized (Server.class) {
                 localInstance = instance;
                 if (localInstance == null) {
-                    instance = localInstance = new ServerConnector();
+                    instance = localInstance = new Server();
                 }
             }
         }

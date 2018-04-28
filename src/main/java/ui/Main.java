@@ -22,7 +22,6 @@ public class Main extends Application {
         logger.info("Building FXMLLoader, loading resources");
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../fxml/login.fxml"));
-//        loader.setLocation(getClass().getResource("../fxml/register.fxml"));
         loader.setResources(ResourceBundle.getBundle("bundles.locale", new Locale("en")));
 
         logger.info("Loading the loader");
@@ -30,20 +29,14 @@ public class Main extends Application {
         LoginController loginController = loader.getController();
         loginController.setMainStage(primaryStage);
 
-//        Parent fxmlMain = loader.load();
-//        RegisterController registerController = loader.getController();
-//        registerController.setMainStage(primaryStage);
-//        registerController.setLogger(new ConsoleLogger());
-
         logger.info("Loading the \"Login\" scene\n");
         Scene scene = new Scene(fxmlMain, UIConstants.loginWindowWidth, UIConstants.loginWindowHeight);
-        //primaryStage.setTitle(loader.getResources().getString("title.name.login"));
+        primaryStage.setTitle(loader.getResources().getString("title.name.login"));
         primaryStage.setMinWidth(280);
         primaryStage.setMinHeight(150);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
